@@ -49,6 +49,24 @@ p{
 .centrar-texto{
     text-align: center;
 }
+/**Boton**/
+.boton{
+   color: #ffffff;
+   font-weight:700;
+   text-decoration: nome;
+   font-size: 1.8rem;
+   padding: 1rem  3rem;
+}
+.boton-amarillo {
+    background-color:#E08709;
+
+}
+.boton-verde {
+    background-color:#71B100;
+
+}
+
+
 
 /*Header*/
 .site-header.inicio{
@@ -140,4 +158,7 @@ p{
 .contenido-anuncio h3, .contenido-anuncio p {
     margin: 0;
 }
-
+.precio {
+    color: #71B100;
+    font-weight: 700;
+}
