@@ -1,0 +1,122 @@
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    line-height: 2;
+}
+
+/*Globales*/
+.contenedor{
+    max-width: 120rem;
+    margin: 0 auto;
+}
+
+h1{
+    font-size: 3.8rem;
+}
+
+h2{
+    font-size: 3.4rem;
+}
+
+h3{
+    font-size: 3rem;
+}
+
+h4{
+    font-size: 2.4rem;
+}
+
+p{
+    font-size: 1.4rem;
+}
+
+/*Utilidades*/
+.section {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.fw-600{
+    font-weight: 600;
+}
+
+.centrar-texto{
+    text-align: center;
+}
+
+/*Header*/
+.site-header.inicio{
+    background-image: url(../img/Fondo.jpg);
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+    min-height: 60rem;
+}
+
+.contenido-header{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.contenido-header h1{
+    color: white;
+    padding-bottom: 2rem;
+    max-width: 50rem;
+    line-height: 4.5rem;
+    font-size: 3.4rem;
+}
+
+.barra{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+}
+
+.barra a{
+    text-decoration: none;
+    color: white;
+}
+
+.barra a:hover{
+    color: brown;
+}
+
+/*Navegacion*/
+.navegacion a{
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 2rem;
+    margin-right: 2rem;
+    
+}
+
+.navegacion a:hover{
+    color: brown;
+}
+
+.navegacion a:last-of-type{
+    margin: 0;
+}
+
+/*Iconos Nosotros*/
+
+.iconos-nosotros{
+    display: flex;
+    justify-content: space-between;
+}
+
+.iconos{
+    flex-basis: calc(33.3% - 1rem);
+    text-align: center;
+}
+
+.iconos h3{
+    text-transform: uppercase;
+}
