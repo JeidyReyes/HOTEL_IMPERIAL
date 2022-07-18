@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hoteleria| {% block title %}{% endblock title %}</title> 
+        {% load static %}
+        <link rel="shortcut icon" href="{% static 'core/img/Logotipo.png' %}">
+        <link rel="stylesheet" href="{% static 'core/Css/Estilos.css' %}">
+        <link rel="stylesheet" href="{% static 'core/Css/Normalize.css' %}">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,400;1,700;1,900&display=swap"
+            rel="stylesheet">
+    </head>
+    <body>
+        <header class="site-header inicio">
+            <div class="contenedor contenido-header">
+                <div class="barra">
+                    <a href="{% url 'home' %}">
+                        <h2>Hotel Imperial </h2>
+                    </a>
+                    <nav class="navegacion">
+                        <a href="Nosotros.html">Nosotros</a>
+                        <a href="">Anuncios</a>
+                        <a href="">Blog</a>
+                        <a href="">Contactos</a>
+                    </nav>
+                </div>
+                <h1> Reservaciones de habitaciones en hotel de lujo</h1>
+            </div>
+        </header>
+        
+        {% block content %}{% endblock content %}
+
+        <footer>
+            <nav class="navegacion">
+                <a href="Nosotros.html">Nosotros</a>
+                <a href="">Anuncios</a>
+                <a href="">Blog</a>
+                <a href="">Contactos</a>
+            </nav>
+            <p>Todos los Derechos Reservados2022 &copy</p>
+        </footer>
+    </body>
+</html>
