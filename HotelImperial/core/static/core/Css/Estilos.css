@@ -173,3 +173,8 @@ p{
      display: flex;
      justify-content: flex-end;
 }
+.imagen-contactenos {
+    background-image: url(../img/Contactenos.jpg);
+    background-repeat: center center;
+    height: 40rem;
+}
