@@ -31,35 +31,32 @@
 
     <main class="seccion contenedor">
         <h2 class="fw-300 centrar-texto">Tipos de Habitaciones disponibles</h2>
-
         <div class="contenedor-anuncios">
-            <div class="anuncio">
-                <img src="{% static 'core/img/Habitacion1.jpg' %}" alt="Anuncios">
-                <div class="contenido-anuncio">
-                    <h3> Habitación Master </h3>
-                    <p> Habitación con cama master, equipada con todas las
-                        necesidades, acabados de lujo, servicio a la habitación,
-                        servicio deinternet y televisión, exelente vista de la
-                        ciudad, para que puedas relajarte de la forma más VIP. </p>
-                    <p class="precio"> $100 la noche</p>
-                    <ul class="iconos-caracteristicas">
-                        <li>
-                            <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
-                            <p>4</p>
-                        </li>
-                        <li>
-                            <img src="{% static 'core/img/Icon_Cama.png' %}" alt="Icono Cama">
-                            <p>3</p>
-                        </li>
-                        <li>
-                            <img src="{% static 'core/img/Icon_Aire.png' %}" alt="Icono Aire">
-                            <p>Si</p>
-                        </li>
-                    </ul>
-                    <a href="#" class="boton boton-amarillo d-block">Ver Habitacion</a>
+            {% for rooms in rooms %}
+                <div class="anuncio">
+                    <img src="{{rooms.image.url}}" alt="Anuncios">
+                    <div class="contenido-anuncio">
+                        <h3>{{rooms.title}}</h3>
+                        <p>{{rooms.description}}</p>
+                        <p class="precio"> $ {{rooms.price}} la noche</p>
+                        <ul class="iconos-caracteristicas">
+                            <li>
+                                <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
+                                <p>4</p>
+                            </li>
+                            <li>
+                                <img src="{% static 'core/img/Icon_Cama.png' %}" alt="Icono Cama">
+                                <p>3</p>
+                            </li>
+                            <li>
+                                <img src="{% static 'core/img/Icon_Aire.png' %}" alt="Icono Aire">
+                                <p>Si</p>
+                            </li>
+                        </ul>
+                        <a href="#" class="boton boton-amarillo d-block">Ver Habitacion</a>
+                    </div>
                 </div>
-            </div>
-
+            {% endfor %}
             <div class="anuncio">
                 <img src="{% static 'core/img/Habitacion2.jpg' %}" alt="Anuncios">
                 <div class="contenido-anuncio">
