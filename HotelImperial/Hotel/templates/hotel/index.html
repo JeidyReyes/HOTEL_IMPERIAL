@@ -39,6 +39,7 @@
                         <h3>{{rooms.title}}</h3>
                         <p>{{rooms.description}}</p>
                         <p class="precio"> $ {{rooms.price}} la noche</p>
+                        {% if rooms.price != 100.0 %}<br>{% endif %}
                         <ul class="iconos-caracteristicas">
                             <li>
                                 <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
@@ -57,61 +58,6 @@
                     </div>
                 </div>
             {% endfor %}
-            <div class="anuncio">
-                <img src="{% static 'core/img/Habitacion2.jpg' %}" alt="Anuncios">
-                <div class="contenido-anuncio">
-                    <h3> Habitación familiar </h3>
-                    <p> Habitación con dos camas grandes, para un maximo de 4
-                        personas, con todas las necesidades incluidas, servicio a la
-                        habitación, seguridad, cerca de la ccafetería del hotel.
-                    </p>
-                    <p class="precio"> $80 la noche </p>
-                    <br>
-                    <ul class="iconos-caracteristicas">
-                        <li>
-                            <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
-                            <p>4</p>
-                        </li>
-                        <li>
-                            <img src="{% static 'core/img/Icon_Cama.png' %}" alt="Icono Cama">
-                            <p>3</p>
-                        </li>
-                        <li>
-                            <img src="{% static 'core/img/Icon_Aire.png' %}" alt="Icono Aire">
-                            <p>Si</p>
-                        </li>
-                    </ul>
-                    <a href="#" class="boton boton-amarillo d-block">Ver Habitacion</a>
-                </div>
-            </div>
-
-            <div class="anuncio">
-                <img src="{% static 'core/img/Habitacion3.jpg' %}" alt="Anuncios">
-                <div class="contenido-anuncio">
-                    <h3> Habitación sencilla </h3>
-                    <p> Habitación con una cama sencilla, con necesidades basicas
-                        incorporadas, desayuno incluido, seguridad y acceso a
-                        internet.
-                    </p>
-                    <p class="precio"> $30 </p>
-                    <br>
-                    <ul class="iconos-caracteristicas">
-                        <li>
-                            <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
-                            <p>1</p>
-                        </li>
-                        <li>
-                            <img src="{% static 'core/img/Icon_Cama.png' %}" alt="Icono Cama">
-                            <p>1</p>
-                        </li>
-                        <li>
-                            <img src="{% static 'core/img/Icon_Aire.png' %}" alt="Icono Aire">
-                            <p>No</p>
-                        </li>
-                    </ul>
-                    <a href="#" class="boton boton-amarillo d-block">Ver Habitacion</a>
-                </div>
-            </div>
         </div>
         <div class="ver-todas">
             <a href="anuncio.html" class="boton boton-verde">Ver Todas</a>
