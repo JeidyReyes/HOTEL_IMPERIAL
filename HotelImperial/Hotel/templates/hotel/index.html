@@ -69,41 +69,25 @@
             <a href="" class="boton boton-amarillo">Contactenos</a>
         </div>
     </section>
+
     <div class="seccion-inferior contenedor section">
         <section class="blog">
             <h3 class="centrar-texto fw-600">Nuestro Blog</h3>
-            <article class="entrada-blog">
-                <div class="imagen">
-                    <img src="{% static 'core/img/Blog1.jpg' %}" alt="Blog">
-                </div>
-                <div class="texto-entrada">
-                    <a href="#">
-                        <h4>La mejor Habitacion</h4>
-                    </a>
-                    <p>Escrito el: <em>01/07/2022</em> por: <em>Admin</em></p>
-                    <p>Consejos para elegir la mejor habitacion segun tus gustos y
-                        presupuestos </p>
-                </div>
-            </article>
-
-            <!--Editar esta parte, esta igual a la de arriba-->
-            <!--Esto-->
-            <article class="entrada-blog">
-                <div class="imagen">
-                    <img src="{% static 'core/img/Blog2.jpg' %}" alt="Blog"> 
-                </div>
-                <div class="texto-entrada">
-                    <a href="#">
-                        <h4>La mejor Habitacion</h4>
-                    </a>
-                    <p>Escrito el: <em>01/07/2022</em> por: <em>Admin</em></p>
-                    <p>Consejos para elegir la mejor habitacion segun tus gustos y
-                        presupuestos </p>
-                </div>
-            </article>
-            <!--Esto-->
+            {% for blog in blog %}
+                <article class="entrada-blog">
+                    <div class="imagen">
+                        <img src="{{blog.image.url}}" alt="Blog">
+                    </div>
+                    <div class="texto-entrada">
+                        <a href="#">
+                            <h4>{{blog.title}}</h4>
+                        </a>
+                        <p>Escrito el: <em>{{blog.date| date:'Y-m-d'}}</em> por: <em>{{blog.author}}</em></p>
+                        <p>{{blog.description}}</p>
+                    </div>
+                </article>
+            {% endfor %}
         </section>
-
         <section class="testimoniales">
             <h3 class="centrar-texto fw-600">Testimoniales</h3>
             <div class="testimonial">
