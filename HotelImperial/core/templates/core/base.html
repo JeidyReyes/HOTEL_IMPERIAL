@@ -14,7 +14,7 @@
             rel="stylesheet">
     </head>
     <body>
-        <header class="site-header inicio">
+        <header class="{% block header %}{% endblock %}">
             <div class="contenedor contenido-header">
                 <div class="barra">
                     <a href="{% url 'home' %}">
@@ -28,7 +28,7 @@
                         <a href="{% url 'login' %}">Registrarse</a>
                     </nav>
                 </div>
-                <h1> Reservaciones de habitaciones en hotel de lujo</h1>
+                {% block title-header %}{% endblock %}
             </div>
         </header>
         
