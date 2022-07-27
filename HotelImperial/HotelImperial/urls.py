@@ -24,7 +24,7 @@ from django.conf import settings
 urlpatterns = [
     path('', hotelViews.home, name="home"),
     path('login/', coreViews.login, name="login"),
-    path('nosotros/', coreViews.nosotros, name="nosotros"),
+    path('nosotros/', hotelViews.nosotros, name="nosotros"),
     path('admin/', admin.site.urls),
 ]
 
