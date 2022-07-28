@@ -23,7 +23,7 @@
                     <nav class="navegacion">
                         <a href="{% url 'nosotros' %}">Nosotros</a>
                         <a href="">Anuncios</a>
-                        <a href="">Blog</a>
+                        <a href="{% url 'blog' %}">Blog</a>
                         <a href="">Contactos</a>
                         <a href="{% url 'login' %}">Registrarse</a>
                     </nav>
@@ -37,13 +37,13 @@
         <footer class="site-footer section">
             <div class="contenedor contenedor-footer">
                 <nav class="navegacion">
-                    <a href="Nosotros.html">Nosotros</a>
+                    <a href="{% url 'blog' %}">Nosotros</a>
                     <a href="">Anuncios</a>
-                    <a href="">Blog</a>
+                    <a href="{% url 'blog' %}">Blog</a>
                     <a href="">Contactos</a>
                 </nav>
                 <p class="copyringt">Todos los Derechos Reservados2022 &copy</p>
             </div>
         </footer>
-    </body>
+    </body> 
 </html>

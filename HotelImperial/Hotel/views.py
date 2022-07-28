@@ -17,3 +17,7 @@ def home(request):
 def nosotros(request):
     about = About.objects.all()
     return render(request, "hotel/Nosotros.html", {'about': about})
+def blog(request):
+    blog = Blog.objects.all()
+    return render(request, "hotel/Blog.html", {'blog': blog})
+ 
