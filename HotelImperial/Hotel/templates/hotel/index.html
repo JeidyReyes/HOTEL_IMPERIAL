@@ -99,11 +99,12 @@
         <section class="testimoniales">
             <h3 class="centrar-texto fw-600">Testimoniales</h3>
             <div class="testimonial">
-                <blockquote>
-                    El personal se comporto de una excelennte forma, muy buena
-                    atencion y las habitaciones que ofrecen son la mejores
-                </blockquote>
-                <p>-Edison Macias</p>
+                {% for testimony in testimony %}
+                    <blockquote>
+                        {{testimony.description}}
+                    </blockquote>
+                    <p>-{{testimony.author}}</p>
+                {% endfor %}
             </div>
         </section>
     </div>

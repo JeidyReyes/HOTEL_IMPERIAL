@@ -52,3 +52,16 @@ class Blog (models.Model):
         ordering = ["-created"]
     def __str__(self):
         return self.title 
+
+class Testimony(models.Model):
+    description = models.TextField(verbose_name="Descripcion")
+    author = models.CharField(max_length=200, verbose_name="Autor")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creacion")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificacion")
+
+    class Meta:
+        verbose_name = 'Testimonial'
+        verbose_name_plural = 'Testimoniales'
+        ordering = ["-created"]
+    def __str__(self):
+        return self.author

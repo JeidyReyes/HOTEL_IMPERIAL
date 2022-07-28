@@ -18,7 +18,6 @@ from django.urls import path
 from core import views as coreViews
 from Hotel import views as hotelViews
 
-
 from django.conf import settings
 
 urlpatterns = [
@@ -27,6 +26,7 @@ urlpatterns = [
     path('nosotros/', hotelViews.nosotros, name="nosotros"),
     path('admin/', admin.site.urls),
 ]
+
 
 if settings.DEBUG:
     from django.conf.urls.static import static
