@@ -1,9 +1,13 @@
-const variable = document.getElementsById(id).value;
-
-function getValue(e){
-    variable = e.value;
+var empId;
+var cont;
+function getEmpId(element)
+{
+    empId = element.dataset.employeeId;
+    alert(empId);
+    sessionStorage.setItem('var', empId);
 }
 
+
 function doc() {
-    document.write(variable)
+    document.write(sessionStorage.getItem('var'));
 }

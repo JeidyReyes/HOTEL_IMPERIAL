@@ -23,6 +23,7 @@ def blog(request):
     return render(request, "hotel/Blog.html", {'blog': blog})
 
 def blogentrada(request):
+    
     blog = Blog.objects.all()
     return render(request, "hotel/Blog-entrada.html", {'blog': blog})
  

@@ -11,11 +11,12 @@
                         <img src="{{blog.image.url}}" alt="Blog">
                     </div>
                     <div class="texto-entrada">
-                        <a href="{% url 'blogentrada' %}" >
+                        <a href="{% url 'blogentrada' %}" onclick="getEmpId(this)" data-employee-id="{{forloop.counter}}">
                             <h4>{{blog.title}}</h4>
                         </a>
+                        <script>doc()</script>
                         <p>Escrito el: <em>{{blog.date| date:'Y-m-d'}}</em> por: <em>{{blog.author}}</em></p>
-                        <p onclick="getValue(this)" id="1">{{blog.description}}</p>
+                        <p>{{blog.description}}</p>
                     </div>
                 </article>
                 <script>doc()</script>
