@@ -23,6 +23,7 @@ from django.conf import settings
 urlpatterns = [
     path('', hotelViews.home, name="home"),
     path('login/', coreViews.login, name="login"),
+    path('contacto/', coreViews.contacto, name="contacto"),
     path('nosotros/', hotelViews.nosotros, name="nosotros"),
     path('blog/', hotelViews.blog, name="blog"), 
     path('blogentrada/', hotelViews.blogentrada, name="blogentrada"), 
