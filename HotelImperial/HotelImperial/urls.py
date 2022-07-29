@@ -25,6 +25,7 @@ urlpatterns = [
     path('login/', coreViews.login, name="login"),
     path('nosotros/', hotelViews.nosotros, name="nosotros"),
     path('blog/', hotelViews.blog, name="blog"), 
+    path('blogentrada/', hotelViews.blogentrada, name="blogentrada"), 
     path('admin/', admin.site.urls),
 ]
 

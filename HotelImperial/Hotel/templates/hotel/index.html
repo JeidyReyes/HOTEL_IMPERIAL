@@ -86,7 +86,7 @@
                         <img src="{{blog.image.url}}" alt="Blog">
                     </div>
                     <div class="texto-entrada">
-                        <a href="#">
+                        <a href="{% url 'blogentrada' %}">
                             <h4>{{blog.title}}</h4>
                         </a>
                         <p>Escrito el: <em>{{blog.date| date:'Y-m-d'}}</em> por: <em>{{blog.author}}</em></p>

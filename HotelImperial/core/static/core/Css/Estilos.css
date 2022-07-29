@@ -56,6 +56,16 @@ p{
 .d-block {
     display: block!important;
 }
+.centradoimg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.centrado{
+    display: block;
+    margin-left: 30rem;
+    margin-right: 30rem;
+}
    
 /**Boton**/
 .boton{
@@ -311,4 +321,8 @@ p{
 }
 .texto-nosotros p{
     text-align: justify;
+}
+.image{
+    width: 80rem;
+    height: 45rem;
 }
