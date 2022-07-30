@@ -23,7 +23,7 @@ def blog(request):
     return render(request, "hotel/Blog.html", {'blog': blog})
 
 def blogentrada(request):
-    
+    cont = 1
     blog = Blog.objects.all()
-    return render(request, "hotel/Blog-entrada.html", {'blog': blog})
+    return render(request, "hotel/Blog-entrada.html", {'blog': blog, 'cont': cont})
  

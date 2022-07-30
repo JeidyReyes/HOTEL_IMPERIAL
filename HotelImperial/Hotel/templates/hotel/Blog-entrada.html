@@ -2,17 +2,25 @@
 {% block title %}Blog{% endblock %}
 {% block header %}site-header{% endblock %}
 {% block content %}
-{% for blog in blog%}
-   <script></script>
-{% if forloop.counter == 1 %}
-    <h1 class="centrar-texto fw-600">{{blog.title}}</h1>
-    <img src="{{blog.image.url}}" alt="Imagen blog" class="centradoimg image">
-    <main class="contenedor seccion centrado texto-entrada">
-        <p>Escrito el: <em>{{blog.date| date:'Y-m-d'}}</em> por: <em>{{blog.author}}</em></p>
-        <p>
-            {{blog.description}}
-        </p>
-    </main>
-{% endif %}
+{% for blog in blog %}
+    <script> 
+        var a;
+        a = doc();
+        b = {{forloop.counter}}
+        while (a != b) {
+            element.parentNode.removeChild(element);
+        }
+        
+    </script>
+    <div id="element">
+        <h1 class="centrar-texto fw-600">{{blog.title}}</h1>
+        <img src="{{blog.image.url}}" alt="Imagen blog" class="centradoimg image">
+        <main class="contenedor seccion centrado texto-entrada">
+            <p>Escrito el: <em>{{blog.date| date:'Y-m-d'}}</em> por: <em>{{blog.author}}</em></p>
+            <p>
+                {{blog.description}}
+            </p>
+        </main>
+    </div>
 {% endfor %}
 {% endblock %}
