@@ -32,7 +32,7 @@
 
     <main class="seccion contenedor">
         <h2 class="fw-300 centrar-texto">Tipos de Habitaciones disponibles</h2>
-        <div class="contenedor-anuncios">
+        <div class="contenedor-anuncios">      
             {% for rooms in rooms %}
             {% if forloop.counter <= 3 %}
                 <div class="anuncio">
@@ -56,14 +56,14 @@
                                 <p>Si</p>
                             </li>
                         </ul>
-                        <a href="#" class="boton boton-amarillo d-block">Ver Habitacion</a>
+                        <a href="{% url 'anuncio' %}" class="boton boton-amarillo d-block">Ver Habitacion</a>
                     </div>
-                </div>
+                </div>  
             {% endif %}
             {% endfor %}
-        </div>
+        </div> 
         <div class="ver-todas">
-            <a href="anuncio.html" class="boton boton-verde">Ver Todas</a>
+            <a href="{% url 'anuncios' %}" class="boton boton-verde">Ver Todas</a>
         </div>
     </main>
 
@@ -72,7 +72,7 @@
             <h2>Encuentre la mejor habitacion</h2>
             <p>Llene el formulario de contacto y un asesor se pondra en contacto
                 con usted</p>
-            <a href="" class="boton boton-amarillo">Contactenos</a>
+            <a href="{% url 'contacto' %}" class="boton boton-amarillo">Contactenos</a>
         </div>
     </section>
 

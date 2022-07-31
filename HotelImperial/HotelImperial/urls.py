@@ -27,6 +27,8 @@ urlpatterns = [
     path('nosotros/', hotelViews.nosotros, name="nosotros"),
     path('blog/', hotelViews.blog, name="blog"), 
     path('blogentrada/', hotelViews.blogentrada, name="blogentrada"), 
+    path('anuncios/', hotelViews.anuncios, name="anuncios"), 
+    path('anuncio/', hotelViews.anuncio, name="anuncio"), 
     path('admin/', admin.site.urls),
 ]
 
