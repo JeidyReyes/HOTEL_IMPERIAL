@@ -4,24 +4,20 @@
 {% block content %}
 {% load static %}
 {% for room in room %}
-{% if forloop.counter <= 1 %}
     <h2 class="fw-300 centrar-texto">{{room.title}}</h2>
-    <div class="contenedor-anuncios contenedor">          
+    <div class="contenedor-anuncio contenedor">    
         <img src="{{room.image.url}}" alt="Anuncios">
         <div class="informacion">
             <div>
                 <ul class="iconos-caracteristicas">
                     <li>
                         <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
-                        <p>4</p>
                     </li>
                     <li>
                         <img src="{% static 'core/img/Icon_Cama.png' %}" alt="Icono Cama">
-                        <p>3</p>
                     </li>
                     <li>
                         <img src="{% static 'core/img/Icon_Aire.png' %}" alt="Icono Aire">
-                        <p>Si</p>
                     </li>
                 </ul>
             </div>
@@ -32,10 +28,9 @@
                 <p>{{room.description}}</p> 
             </div>
         </div>
-    </div> 
+    </div>
+{% endfor %}
     <div class="centrar-texto">
         <a href="#" class="boton boton-amarillo">Reservar</a>
     </div>
-{% endif %}
-{% endfor %}
 {% endblock %}

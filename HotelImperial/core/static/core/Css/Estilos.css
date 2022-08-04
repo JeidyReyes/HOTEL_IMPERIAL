@@ -167,17 +167,28 @@ p{
 }
 /** Anuncios **/
 .contenedor-anuncios{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.contenedor-anuncio{
     display: flex;
     justify-content: space-between;
 }
 .anuncio{
-    flex-basis: calc(33.3% - 1rem);
+    margin: 1rem 1rem 1rem 1rem;
+    width: calc(32% - 1rem);
     border: 1px solid #b5b5b5;
     background-color: #f5f5f5;
 }
 .contenido-anuncio{
     padding: 2rem;
 }
+.abajo{
+    top: 600rem;
+}
+
 .contenido-anuncio h3, .contenido-anuncio p {
     margin: 0;
 }

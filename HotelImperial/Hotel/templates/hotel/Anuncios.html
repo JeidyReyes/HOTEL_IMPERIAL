@@ -5,34 +5,33 @@
 {% load static %}
 <main class="seccion contenedor">
     <h2 class="fw-300 centrar-texto">Tipos de Habitaciones disponibles</h2>
-    <div class="contenedor-anuncios">      
+    <div class="contenedor-anuncios">   
         {% for room in room %}
-        {% if forloop.counter <= 3 %}
             <div class="anuncio">
-                <img src="{{room.image.url}}" alt="Anuncios">
+                <div>
+                    <img src="{{room.image.url}}" alt="Anuncios">
+                </div>
                 <div class="contenido-anuncio">
                     <h3>{{room.title}}</h3>
                     <p>{{room.description}}</p>
                     <p class="precio"> $ {{room.price}} la noche</p>
-                    {% if room.price != 100.0 %}<br>{% endif %}
+                    {% if room.price == 30.0 %}<br>{% endif %}
                     <ul class="iconos-caracteristicas">
                         <li>
                             <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
-                            <p>4</p>
                         </li>
                         <li>
                             <img src="{% static 'core/img/Icon_Cama.png' %}" alt="Icono Cama">
-                            <p>3</p>
                         </li>
                         <li>
                             <img src="{% static 'core/img/Icon_Aire.png' %}" alt="Icono Aire">
-                            <p>Si</p>
                         </li>
                     </ul>
-                    <a href="{% url 'anuncio' %}" class="boton boton-amarillo d-block">Ver Habitacion</a>
+                    <div>
+                        <a href="{% url 'anuncio' room.title %}" class="boton boton-amarillo d-block">Ver Habitacion</a>
+                    </div>
                 </div>
             </div>  
-        {% endif %}
         {% endfor %}
     </div> 
 </main>

@@ -7,6 +7,8 @@ class Room (models.Model):
     description = models.TextField(verbose_name="Descripcion")
     price = models.FloatField(verbose_name="Precio")
     image = models.ImageField(verbose_name="Imagen", upload_to= "rooms")
+    NumPeople = models.IntegerField(verbose_name="Numero de Personas")
+    NumRoom = models.IntegerField(verbose_name="Numero de Habitaciones")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificacion")
 
