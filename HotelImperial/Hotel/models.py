@@ -33,7 +33,7 @@ class Reservation(models.Model):
         verbose_name_plural = 'Reservaciones'
         ordering = ["-date"]
     def __str__(self):
-        return self.client
+        return self.cliente
 
 class About (models.Model):
     title = models.CharField(max_length=100, verbose_name="Titulo")
