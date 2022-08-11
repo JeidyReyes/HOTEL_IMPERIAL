@@ -6,8 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Hoteleria| {% block title %}{% endblock title %}</title> 
         {% load static %}
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+        <link rel="" href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script> 
         <link rel="shortcut icon" href="{% static 'core/img/Logotipo.png' %}">
-        <script src="{% static 'core/js/Contador.js' %}"></script>
+        <script src="{% static 'core/js/Tables.js' %}"></script>
         <link rel="stylesheet" href="{% static 'core/Css/Estilos.css' %}">
         <link rel="stylesheet" href="{% static 'core/Css/Normalize.css' %}">
         <link
@@ -18,15 +23,31 @@
         <header class="{% block header %}{% endblock %}">
             <div class="contenedor contenido-header">
                 <div class="barra">
-                    <a href="{% url 'home' %}">
-                        <h2>Hotel Imperial </h2>
+                    <a href="{% url 'home' %}" >
+                        <div class="barra1">
+                            <h2>Hotel Imperial </h2>
+                            {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+                                    <h4>Bienvenido {{user.username}}</h4> 
+                                {% else %}
+                                    <h4>Bienvenido {{user.first_name}}</h4> 
+                                {% endif %}                        
+                            {% endif %}
+                        </div>
                     </a>
                     <nav class="navegacion">
                         <a href="{% url 'nosotros' %}">Nosotros</a>
                         <a href="{% url 'anuncios' %}">Anuncios</a>
                         <a href="{% url 'blog' %}">Blog</a>
                         <a href="{% url 'contacto' %}">Contactos</a>
-                        <a href="{% url 'login' %}">Registrarse</a>
+                        {% if user.is_authenticated %}
+                            {% if user.is_superuser %}
+                            <a href="{% url 'reservacion' %}">Reservaciones</a>
+                            {% endif %}
+                            <a href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a> 
+                        {% else %}              
+                            <a href="{% url 'login' %}">Login</a>         
+                        {% endif %}
                     </nav>
                 </div>
                 {% block title-header %}{% endblock %}

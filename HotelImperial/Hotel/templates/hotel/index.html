@@ -53,7 +53,7 @@
                                 <img src="{% static 'core/img/Icon_Aire.png' %}" alt="Icono Aire">
                             </li>
                         </ul>
-                        <a href="{% url 'anuncio' %}" class="boton boton-amarillo d-block" >Ver Habitacion</a>
+                        <a href="{% url 'anuncio' rooms.title %}" class="boton boton-amarillo d-block" >Ver Habitacion</a>
                     </div>
                 </div>  
             {% endif %}
@@ -83,7 +83,7 @@
                         <img src="{{blog.image.url}}" alt="Blog">
                     </div>
                     <div class="texto-entrada">
-                        <a href="{% url 'blogentrada' %}">
+                        <a href="{% url 'blogentrada' blog.title %}">
                             <h4>{{blog.title}}</h4>
                         </a>
                         <p>Escrito el: <em>{{blog.date| date:'Y-m-d'}}</em> por: <em>{{blog.author}}</em></p>

@@ -15,8 +15,14 @@ body{
     overflow: hidden;
 }
 
-.form-box{
-    width: 300px;
+.form-box-r{
+    width: 500px;
+    padding: 40px;
+    background: #191919;
+    text-align: center;
+}
+.form-box-l{
+    width: 350px;
     padding: 40px;
     background: #191919;
     text-align: center;
@@ -28,9 +34,25 @@ body{
     font-weight: 500;
 }
 
-.form-box input[type="text"],
-.form-box input[type="password"],
-.form-box button[type="submit"] {
+.form-box-r input[type="text"],
+.form-box-r input[type="password"],
+.form-box-r button[type="submit"] {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    padding: 6px 10px;
+    text-align: center;
+    border: 2px solid #3742fa;
+    width: 300px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+.form-box-l input[type="text"],
+.form-box-l input[type="password"],
+.form-box-l button[type="submit"] {
     border: 0;
     background: none;
     display: block;
@@ -60,4 +82,10 @@ body{
 
 .form-box button[type="submit"]:hover {
     background: none;
+}
+.registrar{
+    color: white;
+}
+.registrar:hover{
+    color: red;
 }

@@ -1,13 +1,6 @@
-from django.shortcuts import render
-from django.views.generic.base import TemplateView
-
-# Create your views here.
-class login(TemplateView):
-    template_name = 'core/Login.html'
-    def get(selt, request):
-        return render(request, selt.template_name)
-
-class contacto(TemplateView):
+from django.shortcuts import render, redirect
+from django.views.generic import View
+class contacto(View):
     template_name = 'core/contacto.html'
     def get(selt, request):
         return render(request, selt.template_name)

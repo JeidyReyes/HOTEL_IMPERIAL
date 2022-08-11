@@ -1,5 +1,8 @@
-from distutils.command.upload import upload
+import email
 from django.db import models
+from django.contrib.auth.models import User
+#from.models import Room
+
 
 # Create your models here.
 class Room (models.Model):
@@ -18,6 +21,19 @@ class Room (models.Model):
         ordering = ["-created"]
     def __str__(self):
         return self.title 
+    
+class Reservation(models.Model):
+    date = models.DateField(verbose_name="Fecha de Reservacion")
+    cliente = models.CharField(verbose_name="Cliente", max_length=100)
+    mail = models.EmailField(verbose_name="Email")
+    room = models.CharField(max_length=100,verbose_name="Habitacion")
+    user = models.CharField(max_length=100,verbose_name="Usuario")
+    class Meta:
+        verbose_name = 'Reservacion'
+        verbose_name_plural = 'Reservaciones'
+        ordering = ["-date"]
+    def __str__(self):
+        return self.client
 
 class About (models.Model):
     title = models.CharField(max_length=100, verbose_name="Titulo")

@@ -127,6 +127,12 @@ p{
     text-decoration: none;
     color: white;
 }
+.barra1 h2{
+    margin: 0;
+}
+.barra1 h4{
+    margin: 0;
+}
 
 .barra a:hover{ 
     color: brown;
@@ -392,4 +398,14 @@ textarea{
     margin: 0 2rem 0 10rem;
     display: flex;
     flex-direction: column;
+}
+.reservar{
+    margin: 5rem 0;
+}
+.reservar h2{
+    margin: 5rem 0;
+}
+.table{
+    margin: 3rem 10rem;
+    width: 115rem;
 }

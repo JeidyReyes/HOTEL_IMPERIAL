@@ -1,12 +1,49 @@
-from turtle import title
-from django.shortcuts import render
+import email
+from django.contrib import messages
+from django.shortcuts import render,redirect
 from django.views.generic.base import TemplateView
-from.models import About
-from.models import Room
-from.models import Blog
-from.models import Testimony
+from.models import About,Room,Blog,Testimony,Reservation
+from django.contrib.auth import logout, authenticate, login as auth_login
+from.forms import SignUpForm, SignipForm
+from.models import Reservation
 
 # Create your views here.
+
+def login(request):
+    if request.method=="POST":
+        form=SignipForm(request,data=request.POST)
+        if form.is_valid():
+            nombre=form.cleaned_data.get('username')
+            contra=form.cleaned_data.get('password')
+            user=authenticate(request,username=nombre, password=contra)
+            if user is not None:
+                auth_login(request,user)
+                return redirect('home')
+            else:
+                messages.error(request, "Usuario no valido")
+        else:
+            messages.success(request, "Informacion incorrecta")
+    form = SignipForm
+    return render(request, 'hotel/Login.html',{'form':form})
+
+class registrar(TemplateView):
+    template_name = 'hotel/Registrar.html'
+    def get(selt, request):
+        form = SignUpForm
+        return render(request, selt.template_name,{'form':form})
+    def post(selt, request):
+        form= SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('home')
+        else:
+            for msg in form.error_messages:
+                messages.error(request, form.error_messages[msg])
+            return render(request, selt.template_name, {'form':form})
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('home')
 class home(TemplateView):
     template_name = 'hotel/index.html'
     def get(selt, request):
@@ -44,4 +81,28 @@ class anuncio(TemplateView):
     template_name = 'hotel/Anuncio.html'
     def get(selt, request, titulo):
         room = Room.objects.filter(title = titulo)
-        return render(request, selt.template_name, {'room':room})
+        return render(request, selt.template_name,{'room':room })
+    def post(selt, request, titulo):
+        room = Room.objects.filter(title = titulo)
+        if request.method=="POST":
+            user =request.POST["user"]
+            date=request.POST["date"]
+            client=request.POST["client"]
+            email=request.POST["email"]
+            reservacion = Reservation()
+            reservacion.date=date
+            reservacion.user= user
+            reservacion.cliente=client
+            reservacion.mail=email
+            reservacion.room= titulo
+            reservacion.save()
+            return redirect('home')
+        else:
+            return render(request, selt.template_name,{'room':room })
+
+class reservacion(TemplateView):
+    template_name = 'hotel/Reservaciones.html'
+    def get(selt, request):
+        reser = Reservation.objects.all()
+        return render(request, selt.template_name, {'reser': reser})
+        
