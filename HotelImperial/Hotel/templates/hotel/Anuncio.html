@@ -4,43 +4,48 @@
 {% block content %}
 {% load static %}
 {% for room in room %}
-    <div class="reservar">
-        <h2 class="fw-300 centrar-texto">{{room.title}}</h2>
-        <div class="contenedor-anuncio contenedor">    
-            <img src="{{room.image.url}}" alt="Anuncios">
-            <div class="informacion">
+<div class="reservar">
+    <h2 class="fw-300 centrar-texto">{{room.title}}</h2>
+    <div class="contenedor-anuncio contenedor">
+        <img src="{{room.image.url}}" alt="Anuncios">
+        <div class="informacion">
+            <div>
                 <div>
-                    <div>
-                        <p>{{room.description}}</p> 
-                    </div>
-                    <ul >
-                        <li>
-                            <p>Camas disponibles: {{room.NumRoom}}</p>
-                        </li>
-                        <li>
-                            <p>Capacidad de: {{room.NumPeople}} persona</p>
-                        </li>
-                        <li>
-                            <p> Precio: $ {{room.price}} la noche</p>
-                        </li>
-                    </ul>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <label for="">Seleccione la fecha de la reservacion</label>
-                        <input type="date" name="date">
-                        <input type="text" name="user" value="{{user.username}}" style="display:none">
-                        <input type="text" name="email" value="{{user.email}}" style="display:none">
-                        <input type="text" name="client" value="{{user.first_name}} {{user.last_name}}" style="display:none">
-                        {% if user.is_authenticated %}
-                        <button type="submit" class="boton boton-amarillo">Reservar</button>
-                        {% else %}
-                        <p style="color: red;">Debe logearse para realizar una reservacion!!!
-                        <a style="color: red;" href="{% url 'login' %}">Login</a></p>
-                        {% endif %}
-                    </form>
+                    <p>{{room.description}}</p>
                 </div>
+                <ul>
+                    <li>
+                        <p>Camas disponibles: {{room.NumRoom}}</p>
+                    </li>
+                    <li>
+                        <p>Capacidad de: {{room.NumPeople}} persona</p>
+                    </li>
+                   <li>
+                        <p> Precio: $ {{room.price}} la noche</p>
+                    </li>
+                </ul>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <label for="">Seleccione la fecha de la reservacion</label>
+                    {% if messages %}
+                    {% for mensaje in messages %}
+                    <span class= "alert alert-warning" >{{mensaje}}</span>
+                    {% endfor %}
+                    {% endif %}
+                    <input type="date" name="date" required min="{{fecha}}">
+                    <input type="text" name="user" value="{{user.username}}" style="display:none">
+                    <input type="text" name="email" value="{{user.email}}" style="display:none">
+                    <input type="text" name="client" value="{{user.first_name}} {{user.last_name}}" style="display:none">
+                    {% if user.is_authenticated %}
+                    <button type="submit" class="boton boton-amarillo">Reservar</button>
+                    {% else %}
+                    <p style="color: red;">Debe logearse para realizar una reservacion!!!
+                    <a style="color: red;" href="{% url 'login' %}">Login</a></p>
+                    {% endif %}
+                </form>
             </div>
         </div>
     </div>
+</div>
 {% endfor %}
 {% endblock %}

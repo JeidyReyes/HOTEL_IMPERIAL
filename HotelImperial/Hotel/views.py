@@ -1,4 +1,4 @@
-import email
+from datetime import datetime, timedelta
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.views.generic.base import TemplateView
@@ -80,23 +80,33 @@ class anuncios(TemplateView):
 class anuncio(TemplateView):
     template_name = 'hotel/Anuncio.html'
     def get(selt, request, titulo):
+        fec = datetime.today()+timedelta(days=1)
+        fecha = fec.strftime('%Y-%m-%d')
         room = Room.objects.filter(title = titulo)
-        return render(request, selt.template_name,{'room':room })
+        return render(request, selt.template_name,{'room':room, 'fecha':fecha})
     def post(selt, request, titulo):
         room = Room.objects.filter(title = titulo)
+        fec = datetime.today()+timedelta(days=1)
+        fecha = fec.strftime('%Y-%m-%d')
         if request.method=="POST":
-            user =request.POST["user"]
             date=request.POST["date"]
-            client=request.POST["client"]
-            email=request.POST["email"]
-            reservacion = Reservation()
-            reservacion.date=date
-            reservacion.user= user
-            reservacion.cliente=client
-            reservacion.mail=email
-            reservacion.room= titulo
-            reservacion.save()
-            return redirect('home')
+            reser = Reservation.objects.filter(room=titulo, date=date)
+            if reser.exists():
+                messages.error(request, "Fecha de reservacion no disponible")
+                return render(request, selt.template_name,{'room':room, 'fecha':fecha })
+            else: 
+                user =request.POST["user"]
+                client=request.POST["client"]
+                email=request.POST["email"]
+                reservacion = Reservation()
+                reservacion.date=date
+                reservacion.user= user
+                reservacion.cliente=client
+                reservacion.mail=email
+                reservacion.room= titulo
+                reservacion.save()
+                messages.error(request, "Reservacion exitosa")
+                return redirect('home')
         else:
             return render(request, selt.template_name,{'room':room })
 
@@ -105,4 +115,12 @@ class reservacion(TemplateView):
     def get(selt, request):
         reser = Reservation.objects.all()
         return render(request, selt.template_name, {'reser': reser})
+    
+class misreservacion(TemplateView):
+    template_name = 'hotel/MisReservaciones.html'
+    def get(selt, request, id):
+        F_reser = Reservation.objects.filter(id = id)
+        F_reser.delete()
+        reser = Reservation.objects.all()
+        return render(request, selt.template_name, {'reser': reser, 'Freser': F_reser})
         

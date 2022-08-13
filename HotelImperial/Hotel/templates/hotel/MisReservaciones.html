@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% block title %}Reservaciones{% endblock %}
+{% block header %}site-header{% endblock %}
+{% block content %}
+{% load static %}
+<div class="table">
+    <table border="1" id="example">
+        <thead>
+            <th>#</th>
+            <th>Cliente</th>
+            <th>Email</th>
+            <th>Usuario</th>
+            <th>Habitacion</th>
+            <th>Fecha</th>
+            <th>Borrar</th>
+        </thead>
+        <tbody>
+            {% for reser in reser %}
+            {% if reser.user == user.username %}
+            <tr>
+                <td>{{reser.id}}</td>
+                <td>{{reser.cliente}}</td>
+                <td>{{reser.mail}}</td>
+                <td>{{reser.user}}</td>
+                <td>{{reser.room}}</td>
+                <td>{{reser.date}}</td>
+                <td><a href="{% url 'misreservacion' reser.id %}">Eliminar</a></td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
