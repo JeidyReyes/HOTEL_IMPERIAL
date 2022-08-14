@@ -4,6 +4,13 @@
 {% block content %}
 {% load static %}
 <div class="table">
+    {% if messages %}
+    {% for mensaje in messages %}
+    <div class="alert alert-{{mensaje.tags}} alert-dismissible fade show msg " style="left: 340px;" role="alert">
+        {{mensaje}}
+    </div>
+    {% endfor %}
+    {% endif %}
     <table border="1" id="example">
         <thead>
             <th>#</th>

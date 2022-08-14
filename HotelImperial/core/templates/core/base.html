@@ -45,8 +45,9 @@
                         {% if user.is_authenticated %}
                             {% if user.is_superuser %}
                             <a href="{% url 'reservacion' %}">Reservaciones</a>
-                            {% endif %}
+                            {% else %}
                             <a href="{% url 'misreservacion' '1' %}">Mis Reservaciones</a>
+                            {% endif %}
                             <a href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a> 
                         {% else %}              
                             <a href="{% url 'login' %}">Login</a>         

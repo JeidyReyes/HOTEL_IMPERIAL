@@ -92,7 +92,7 @@ class anuncio(TemplateView):
             date=request.POST["date"]
             reser = Reservation.objects.filter(room=titulo, date=date)
             if reser.exists():
-                messages.error(request, "Fecha de reservacion no disponible")
+                messages.warning(request, "Fecha de reservacion no disponible")
                 return render(request, selt.template_name,{'room':room, 'fecha':fecha })
             else: 
                 user =request.POST["user"]
@@ -105,8 +105,8 @@ class anuncio(TemplateView):
                 reservacion.mail=email
                 reservacion.room= titulo
                 reservacion.save()
-                messages.error(request, "Reservacion exitosa")
-                return redirect('home')
+                messages.success(request, "Reservacion exitosa")
+                return render(request, selt.template_name,{'room':room, 'fecha':fecha })
         else:
             return render(request, selt.template_name,{'room':room })
 
@@ -120,7 +120,9 @@ class misreservacion(TemplateView):
     template_name = 'hotel/MisReservaciones.html'
     def get(selt, request, id):
         F_reser = Reservation.objects.filter(id = id)
-        F_reser.delete()
+        if F_reser.exists():
+            F_reser.delete()
+            messages.success(request, "Eliminacion exitosa")
         reser = Reservation.objects.all()
         return render(request, selt.template_name, {'reser': reser, 'Freser': F_reser})
         

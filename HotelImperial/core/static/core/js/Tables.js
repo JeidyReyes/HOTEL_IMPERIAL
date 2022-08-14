@@ -6,7 +6,7 @@ $("#btn1").click(function(){
 $(document).ready(function(){
     var table = $('#example').DataTable({
        orderCellsTop: true,
-       fixedHeader: true 
+       fixedHeader: false 
     });
 
     //Creamos una fila en el head de la tabla y lo clonamos para cada columna

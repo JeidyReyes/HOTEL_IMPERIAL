@@ -409,3 +409,9 @@ textarea{
     margin: 3rem 10rem;
     width: 115rem;
 }
+.msg{
+    margin: 10px 10px 10px 60px;
+    width: 300px;
+    text-align: center;
+    align-items: center;
+}
