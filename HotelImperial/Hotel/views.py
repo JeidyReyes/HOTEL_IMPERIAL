@@ -1,11 +1,13 @@
 from datetime import datetime, timedelta
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 from django.contrib import messages
 from django.shortcuts import render,redirect
-from django.views.generic.base import TemplateView
-from.models import About,Room,Blog,Testimony,Reservation
+from django.views.generic.base import TemplateView, View
+from.models import About,Room,Blog,Testimony,Reservation,Asesoria
 from django.contrib.auth import logout, authenticate, login as auth_login
 from.forms import SignUpForm, SignipForm
-from.models import Reservation
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -125,4 +127,59 @@ class misreservacion(TemplateView):
             messages.success(request, "Eliminacion exitosa")
         reser = Reservation.objects.all()
         return render(request, selt.template_name, {'reser': reser, 'Freser': F_reser})
+class Reservaspdf(View):
+    def get(selt, request, *args, **kwargs):
+        reser = Reservation.objects.all()
+        template = get_template('hotel/Mis.html')
+        data ={
+            'reser' : reser
+        }
+        html = template.render(data)
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+        pisa_status = pisa.CreatePDF(html, dest=response)
+        return response
+    def post(selt, request,):
+        return redirect('reservacion')
+    
+class contacto(TemplateView):
+    template_name = 'hotel/contacto.html'
+    def get(selt, request):
+        room = Room.objects.all()
+        return render(request, selt.template_name,{'room':room})
+    def post(selt, request):
+        room = Room.objects.all()
+        if request.method=="POST":
+            mail = request.POST["email"]
+            asess = Asesoria.objects.filter(mail=mail)
+            if asess.exists():
+                messages.warning(request, "Ya tiene una asesoria en curso")
+                return render(request, selt.template_name,{'room':room})
+            else: 
+                name=request.POST["nombre"]
+                tel=request.POST["telefono"]
+                msg=request.POST["mensaje"]
+                rom=request.POST["room"]
+                dispo=request.POST["dispo"]
+                asesoria = Asesoria()
+                asesoria.name= name
+                asesoria.mail= mail
+                asesoria.cell= tel
+                asesoria.msg= msg
+                asesoria.room= rom
+                asesoria.dispo= dispo
+                asesoria.save()
+                messages.success(request, "Formulario enviado exitosamente")
+                return render(request, selt.template_name,{'room':room,})
+        else:
+            return render(request, selt.template_name,{'room':room })
         
+class asesoria(TemplateView):
+    template_name = 'hotel/Asesoria.html'
+    def get(selt, request, id):
+        ass = Asesoria.objects.filter(id = id)
+        if ass.exists():
+            ass.delete()
+            messages.success(request, "La asesoria se registro como realizada")
+        ases = Asesoria.objects.all()
+        return render(request, selt.template_name, {'ases': ases, 'ass': ass})

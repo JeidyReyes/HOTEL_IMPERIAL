@@ -29,14 +29,17 @@
                     <label for="">Seleccione la fecha de la reservacion</label>
                     {% if messages %}
                     {% for mensaje in messages %}
-                    <div class="alert alert-{{mensaje.tags}} alert-dismissible fade show msg" role="alert">
-                        {{mensaje}} <br>
-                        {% with name="success" %}  
-                        {% if name == mensaje.tags %}
-                        <a href="{% url 'home' %}" class="btn btn-success">Acepto</a>
-                        {% endif %}
-                        {% endwith %}
-                      </div>
+                    <div class="msg">
+                        <div class="alert alert-{{mensaje.tags}} alert-dismissible fade show mar" role="alert">
+                            <p class="centrar-texto pad">{{mensaje}} <br>
+                            {% with name="success" %}  
+                            {% if name == mensaje.tags %}
+                                <a href="{% url 'home' %}" class="btn btn-success">Acepto</a>
+                            {% endif %}
+                            {% endwith %}
+                            </p>
+                        </div>
+                    </div>
                     {% endfor %}
                     {% endif %}
                     <input type="date" name="date" required min="{{fecha}}">
@@ -44,7 +47,9 @@
                     <input type="text" name="email" value="{{user.email}}" style="display:none">
                     <input type="text" name="client" value="{{user.first_name}} {{user.last_name}}" style="display:none">
                     {% if user.is_authenticated %}
-                    <button type="submit" class="boton boton-amarillo">Reservar</button>
+                    <p class="centrar-texto">
+                        <button type="submit" class="boton boton-amarillo">Reservar</button>
+                    </p>
                     {% else %}
                     <p style="color: red;">Debe logearse para realizar una reservacion!!!
                     <a style="color: red;" href="{% url 'login' %}">Login</a></p>

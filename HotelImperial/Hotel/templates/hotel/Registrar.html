@@ -14,6 +14,11 @@
 </head>
 <body>
     <form action="" method="post" class="form-box form-box-r animated fadeInUp">
+        <div class="regresar">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'core/img/flecha.png' %}" alt="Regresar">
+            </a>
+        </div>
         <h1 class="form-title">Registrarse</h1>
         {% csrf_token %}
         {{form|crispy}}

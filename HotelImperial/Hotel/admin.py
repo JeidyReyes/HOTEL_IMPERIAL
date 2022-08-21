@@ -1,5 +1,5 @@
 from django.contrib import admin
-from.models import Room, Reservation, About, Blog,Testimony
+from.models import Room, Reservation, About, Blog,Testimony, Asesoria
 
 # Register your models here.
 class Admin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ admin.site.register(About, Admin)
 admin.site.register(Blog, Admin)
 admin.site.register(Testimony, Admin)
 admin.site.register(Reservation)
+admin.site.register(Asesoria, Admin)

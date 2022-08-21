@@ -83,3 +83,20 @@ class Testimony(models.Model):
         ordering = ["-created"]
     def __str__(self):
         return self.author
+    
+class Asesoria (models.Model):
+    name = models.CharField(max_length=200, verbose_name="Nombre")
+    mail = models.CharField(max_length=200, verbose_name="E-mail")
+    cell = models.CharField(max_length=100, verbose_name="Telefono")
+    msg = models.TextField(verbose_name="Mensaje")
+    room = models.CharField(max_length=150, verbose_name="Habitacion")
+    dispo = models.CharField(max_length=100, verbose_name="Disponibilidad")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creacion")
+    updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificacion")
+
+    class Meta:
+        verbose_name = 'Asesoria'
+        verbose_name_plural = 'Asesorias'
+        ordering = ["-created"]
+    def __str__(self):
+        return self.name

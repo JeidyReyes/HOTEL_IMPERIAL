@@ -37,6 +37,9 @@
                             {% endif %}
                         </div>
                     </a>
+                    <div class="Image-menu">
+                        <img src="{% static 'core/img/Menu.png' %}" alt="Menu" onclick="ocultar()">
+                    </div>
                     <nav class="navegacion">
                         <a href="{% url 'nosotros' %}">Nosotros</a>
                         <a href="{% url 'anuncios' %}">Anuncios</a>
@@ -45,6 +48,7 @@
                         {% if user.is_authenticated %}
                             {% if user.is_superuser %}
                             <a href="{% url 'reservacion' %}">Reservaciones</a>
+                            <a href="{% url 'asesoria' '1' %}">Asesorias</a>
                             {% else %}
                             <a href="{% url 'misreservacion' '1' %}">Mis Reservaciones</a>
                             {% endif %}
@@ -62,13 +66,14 @@
 
         <footer class="site-footer section">
             <div class="contenedor contenedor-footer">
-                <nav class="navegacion">
+                <nav class="navegacion n1">
                     <a href="{% url 'nosotros' %}">Nosotros</a>
                     <a href="{% url 'anuncios' %}">Anuncios</a>
                     <a href="{% url 'blog' %}">Blog</a>
                     <a href="{% url 'contacto' %}">Contactos</a>
                 </nav>
-                <p class="copyringt">Todos los Derechos Reservados2022 &copy</p>
+                <div>
+                <p class="copyringt">Todos los Derechos Reservados2022 &copy</p></div>
             </div>
         </footer>
     </body> 

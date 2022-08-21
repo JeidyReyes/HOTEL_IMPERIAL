@@ -15,6 +15,11 @@
     </head>
     <body>
         <form method="post" action="" class="form-box form-box-l animated fadeInUp">
+            <div class="regresar">
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'core/img/flecha.png' %}" alt="Regresar">
+                </a>
+            </div>
             <h1 class="form-title">Login</h1>
             {% csrf_token %}
             {% if messages %}

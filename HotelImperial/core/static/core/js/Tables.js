@@ -26,3 +26,14 @@ $(document).ready(function(){
         } );
     } );   
 });
+
+function ocultar(){
+    var box = document.querySelector(".navegacion")
+    var estado = box.style.display;
+    if (estado == "none") {
+        box.style.display = "flex";
+    }else{
+        box.style.display = "none";
+    }
+    
+}
