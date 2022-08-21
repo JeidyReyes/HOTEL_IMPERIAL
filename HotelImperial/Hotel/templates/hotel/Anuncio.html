@@ -24,8 +24,7 @@
                         <p> Precio: $ {{room.price}} la noche</p>
                     </li>
                 </ul>
-                <form action="" method="post">
-                    {% csrf_token %}
+                <form action="{% url 'pago' room.title room.price %}" >
                     <label for="">Seleccione la fecha de la reservacion</label>
                     {% if messages %}
                     {% for mensaje in messages %}
@@ -42,10 +41,7 @@
                     </div>
                     {% endfor %}
                     {% endif %}
-                    <input type="date" name="date" required min="{{fecha}}">
-                    <input type="text" name="user" value="{{user.username}}" style="display:none">
-                    <input type="text" name="email" value="{{user.email}}" style="display:none">
-                    <input type="text" name="client" value="{{user.first_name}} {{user.last_name}}" style="display:none">
+                    <input type="date" name="date" id="date" required min="{{fecha}}">
                     {% if user.is_authenticated %}
                     <p class="centrar-texto">
                         <button type="submit" class="boton boton-amarillo">Reservar</button>

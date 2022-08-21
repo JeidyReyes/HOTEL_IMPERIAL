@@ -28,12 +28,16 @@ $(document).ready(function(){
 });
 
 function ocultar(){
-    var box = document.querySelector(".navegacion")
+    var box = document.querySelector(".navegacion");
     var estado = box.style.display;
     if (estado == "none") {
         box.style.display = "flex";
     }else{
         box.style.display = "none";
     }
-    
+}
+function fecha(){
+    var box = document.querySelector('input[type="date"]');
+    var box1 = box.value
+    return box1
 }
