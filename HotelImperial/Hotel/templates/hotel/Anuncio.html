@@ -24,7 +24,7 @@
                         <p> Precio: $ {{room.price}} la noche</p>
                     </li>
                 </ul>
-                <form action="{% url 'pago' room.title room.price %}" >
+                <form method="post" id="payment-form">
                     <label for="">Seleccione la fecha de la reservacion</label>
                     {% if messages %}
                     {% for mensaje in messages %}
@@ -41,19 +41,45 @@
                     </div>
                     {% endfor %}
                     {% endif %}
-                    <input type="date" name="date" id="date" required min="{{fecha}}">
+                    {% csrf_token %}
+                    <input type="date" name="date" required min="{{fecha}}">
                     {% if user.is_authenticated %}
-                    <p class="centrar-texto">
-                        <button type="submit" class="boton boton-amarillo">Reservar</button>
-                    </p>
+                    <div id="card-element" class="form-control form-control-lg" style="color: red;"></div>
+                    <div id="card-errors" role="alert"></div>
+                    <button id="submit" class="btn btn-lg btn-success">Pagar</button>
                     {% else %}
                     <p style="color: red;">Debe logearse para realizar una reservacion!!!
                     <a style="color: red;" href="{% url 'login' %}">Login</a></p>
                     {% endif %}
+                    <input type="text" name="price" value="{{room.price}}" style="display:none">
+                    <input type="text" name="user" value="{{user.username}}" style="display:none">
+                    <input type="text" name="email" value="{{user.email}}" style="display:none">
+                    <input type="text" name="client" value="{{user.first_name}} {{user.last_name}}" style="display:none">
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var stripe = Stripe('pk_test_51LZIwGEtfHScMPzfeTsHCrdA88xv1bwx6TT3BdtDPz85sTcdcLpbtRDj4y874KMrSuyVXA2HiaYwlDPStY2dZCB100eF1zRUik');
+    var elements = stripe.elements();
+    var elements = stripe.elements();
+    var style = {
+    base: {
+        color: "#32325d",
+    }
+    };
+
+    var card = elements.create("card", { style: style });
+    card.mount("#card-element");
+    card.on('change', ({error}) => {
+    let displayError = document.getElementById('card-errors');
+    if (error) {
+        displayError.textContent = error.message;
+    } else {
+        displayError.textContent = '';
+    }
+    });
+</script>
 {% endfor %}
 {% endblock %}

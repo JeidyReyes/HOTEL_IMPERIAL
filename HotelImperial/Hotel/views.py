@@ -8,7 +8,8 @@ from.models import About,Room,Blog,Testimony,Reservation,Asesoria
 from django.contrib.auth import logout, authenticate, login as auth_login
 from.forms import SignUpForm, SignipForm
 from django.http import HttpResponse
-
+import stripe
+stripe.api_key = 'sk_test_51LZIwGEtfHScMPzfHSaJAe6KIuzz196qvtNKNEyosYG85AzIKQotICxraJWfEJRLnLcy0gFaOLilPwY01o1I5WM5008zIYfyVV'
 # Create your views here.
 
 def login(request):
@@ -86,6 +87,34 @@ class anuncio(TemplateView):
         fecha = fec.strftime('%Y-%m-%d')
         room = Room.objects.filter(title = titulo)
         return render(request, selt.template_name,{'room':room, 'fecha':fecha})
+    def post(selt, request, titulo):
+        room = Room.objects.filter(title=titulo)
+        fec = datetime.today()+timedelta(days=1)
+        fecha = fec.strftime('%Y-%m-%d')
+        if request.method=="POST":
+            date = request.POST["date"]
+            reser = Reservation.objects.filter(room=titulo, date=date)
+            if reser.exists():
+                messages.warning(request, "Fecha de reservacion no disponible")
+                return render(request, selt.template_name,{'room':room, 'fecha':fecha })
+            else: 
+                price = request.POST["price"]
+                user =request.POST["user"]
+                client=request.POST["client"]
+                email=request.POST["email"]
+                reservacion = Reservation()
+                reservacion.date=date
+                reservacion.user= user
+                reservacion.cliente=client
+                reservacion.mail=email
+                reservacion.room= titulo
+                reservacion.save()
+                messages.success(request, "Reservacion exitosa")
+                
+                return render(request, selt.template_name,{'room':room, 'fecha':fecha })
+        else:
+            return render(request, selt.template_name,{'room':room, 'fecha':fecha })
+
 class reservacion(TemplateView):
     template_name = 'hotel/Reservaciones.html'
     def get(selt, request):
@@ -158,33 +187,4 @@ class asesoria(TemplateView):
         ases = Asesoria.objects.all()
         return render(request, selt.template_name, {'ases': ases, 'ass': ass})
 
-class pago(TemplateView):
-    template_name = 'hotel/Pago.html'
-    def get(selt, request, titulo, price):
-        return render(request, selt.template_name,{'price':price})
-    def post(selt, request, titulo, price):
-        room = Room.objects.filter(title=titulo)
-        fec = datetime.today()+timedelta(days=1)
-        fecha = fec.strftime('%Y-%m-%d')
-        if request.method=="POST":
-            date = request.GET["date"]
-            reser = Reservation.objects.filter(room=titulo, date=date)
-            if reser.exists():
-                messages.warning(request, "Fecha de reservacion no disponible")
-                messages.warning(request, "Pago no realizado")
-                return render(request, 'hotel/anuncio.html',{'room':room, 'fecha':fecha })
-            else: 
-                user =request.POST["user"]
-                client=request.POST["client"]
-                email=request.POST["email"]
-                reservacion = Reservation()
-                reservacion.date=date
-                reservacion.user= user
-                reservacion.cliente=client
-                reservacion.mail=email
-                reservacion.room= titulo
-                reservacion.save()
-                messages.success(request, "Reservacion exitosa")
-                return render(request, 'hotel/anuncio.html',{'room':room, 'fecha':fecha })
-        else:
-            return render(request, selt.template_name,{'room':room })
+    

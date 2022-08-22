@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import anuncio,anuncios,blogentrada,blog,home,nosotros,login,registrar,cerrar_sesion,reservacion,misreservacion,Reservaspdf,contacto
-from .views import asesoria, pago
+from .views import anuncio,anuncios,blogentrada,blog,home,nosotros,login
+from .views import asesoria,registrar,cerrar_sesion,reservacion,misreservacion,Reservaspdf,contacto
 
 urlpatterns = [
     path('', home.as_view(), name="home"),
@@ -16,6 +16,5 @@ urlpatterns = [
     path('reservacion/', reservacion.as_view(), name="reservacion"),
     path('misreservacion/<id>', misreservacion.as_view(), name="misreservacion"),
     path('asesoria/<id>', asesoria.as_view(), name="asesoria"),
-    path('pago/<titulo>/<price>', pago.as_view(), name='pago'),
     path('misreservacionpdf/', Reservaspdf.as_view(), name="misreservacionpdf")
 ]

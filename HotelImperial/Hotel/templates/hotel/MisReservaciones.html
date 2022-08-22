@@ -21,7 +21,6 @@
             <th class="ocultar">Usuario</th>
             <th>Habitacion</th>
             <th>Fecha</th>
-            <th>Borrar</th>
         </thead>
         <tbody>
             {% for reser in reser %}
@@ -33,7 +32,6 @@
                 <td class="ocultar">{{reser.user}}</td>
                 <td>{{reser.room}}</td>
                 <td>{{reser.date}}</td>
-                <td><a href="{% url 'misreservacion' reser.id %}">Eliminar</a></td>
             </tr>
             {% endif %}
             {% endfor %}
