@@ -19,9 +19,7 @@
             <th>Cliente</th>
             <th>Email</th>
             <th>Telefono</th>
-            <th class="ocultar">Habitacion</th>
             <th class="ocultar">Mensaje</th>
-            <th class="ocultar">Disponibilidad</th>
             <th class="ocultar">Marcar</th>
         </thead>
         <tbody>
@@ -31,9 +29,7 @@
                 <td>{{ases.name}}</td>
                 <td>{{ases.mail}}</td>
                 <td>{{ases.cell}}</td>
-                <td class="ocultar">{{ases.room}}</td>
                 <td class="ocultar">{{ases.msg}}</td>
-                <td class="ocultar">{{ases.dispo}}</td>
                 <td class="ocultar"><a href="{% url 'asesoria' ases.id %}">Realizada</a></td>
             </tr>
             {% endfor %}

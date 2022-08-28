@@ -4,15 +4,6 @@
 {% block content %}
 {% load static %}
 <div class="table mostrar">
-    {% if messages %}
-    {% for mensaje in messages %}
-    <div class="msg">
-        <div class="alert alert-{{mensaje.tags}} alert-dismissible fade show mar1" role="alert">
-            <p class="centrar-texto pad">{{mensaje}}</p>
-        </div>
-    </div>
-    {% endfor %}
-    {% endif %}
     <table border="1" id="example">
         <thead>
             <th class="ocultar">#</th>

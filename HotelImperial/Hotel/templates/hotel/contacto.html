@@ -3,15 +3,17 @@
 {% block header %}site-header{% endblock %}
 {% block content %}
 {% load static %}
-    <main class="contenedor seccion contacto">
+    <main class="contenedor section">
         <h1 class="centrar-texto">Contacto</h1>
         <img src="{% static 'core/img/Fondo.jpg' %}" alt="">
-        <h2 class="centrar-texto">Llene el formulario de Contacto</h2>
+        <h2 class="centrar-texto section">Llene el formulario de Contacto</h2>
         <form class="formulario" method="post" action="">
             {% if messages %}
-            {% for mensaje in messages %}
-                <div class="alert alert-{{mensaje.tags}} alert-dismissible fade show msg" role="alert">
-                    {{mensaje}} 
+            {% for mensaje in messages %}.
+                <div class="msg">
+                    <div class="alert alert-{{mensaje.tags}} alert-dismissible fade show mar" role="alert">
+                        <p class="centrar-texto pad">{{mensaje}}</p> 
+                    </div>
                 </div>
             {% endfor %}
             {% endif %}
@@ -29,21 +31,6 @@
 
                 <label for="mensaje">Mensaje:</label>
                 <textarea name="mensaje" required></textarea>
-            </fieldset>
-            <fieldset>
-                <legend>Información sobre las Habitaciones</legend>
-
-                <label for="opciones">Tipo de Habitacion:</label>
-                <select id="opciones" required name="room">
-                    <option value="" disabled selected>-- Seleccione --</option>
-                    {% for room in room %}
-                        <option value="{{room.title}}">{{room.title}}</option>
-                    {% endfor %}
-                </select>
-
-                <label for="Disponibilidad">Disponibilidad</label>
-                <input type="number" placeholder="Disponibilidad" name="dispo" required>
-
             </fieldset>
             <input type="submit"  class="boton boton-verde">
         </form>

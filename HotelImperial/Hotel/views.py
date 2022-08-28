@@ -9,7 +9,7 @@ from django.contrib.auth import logout, authenticate, login as auth_login
 from.forms import SignUpForm, SignipForm
 from django.http import HttpResponse
 import stripe
-stripe.api_key = 'sk_test_51LZIwGEtfHScMPzfHSaJAe6KIuzz196qvtNKNEyosYG85AzIKQotICxraJWfEJRLnLcy0gFaOLilPwY01o1I5WM5008zIYfyVV'
+stripe.api_key = 'sk_test_51LaU1pIOntAHsdbGjPGqs9szKakV8jdmc0AWwJ8uiomlBilW8EJgmlXVk1KrB6NkROsYUXJBncGEsVD8Yd0lfzen008cJCLM4z'
 # Create your views here.
 
 def login(request):
@@ -44,9 +44,11 @@ class registrar(TemplateView):
             for msg in form.error_messages:
                 messages.error(request, form.error_messages[msg])
             return render(request, selt.template_name, {'form':form})
+        
 def cerrar_sesion(request):
     logout(request)
     return redirect('home')
+
 class home(TemplateView):
     template_name = 'hotel/index.html'
     def get(selt, request):
@@ -87,21 +89,36 @@ class anuncio(TemplateView):
         fecha = fec.strftime('%Y-%m-%d')
         room = Room.objects.filter(title = titulo)
         return render(request, selt.template_name,{'room':room, 'fecha':fecha})
-    def post(selt, request, titulo):
-        room = Room.objects.filter(title=titulo)
-        fec = datetime.today()+timedelta(days=1)
-        fecha = fec.strftime('%Y-%m-%d')
-        if request.method=="POST":
-            date = request.POST["date"]
-            reser = Reservation.objects.filter(room=titulo, date=date)
-            if reser.exists():
-                messages.warning(request, "Fecha de reservacion no disponible")
-                return render(request, selt.template_name,{'room':room, 'fecha':fecha })
-            else: 
-                price = request.POST["price"]
-                user =request.POST["user"]
-                client=request.POST["client"]
-                email=request.POST["email"]
+    
+def cargo(request, titulo):
+    room = Room.objects.filter(title=titulo)
+    fec = datetime.today()+timedelta(days=1)
+    fecha = fec.strftime('%Y-%m-%d')
+    if request.method=="POST":
+        date = request.POST["date"]
+        reser = Reservation.objects.filter(room=titulo, date=date)
+        if reser.exists():
+            messages.warning(request, "Fecha de reservacion no disponible")
+            return render(request, 'hotel/Anuncio.html',{'room':room, 'fecha':fecha })
+        else: 
+            price = request.POST["price"]
+            user =request.POST["user"]
+            client=request.POST["client"]
+            email=request.POST["email"]
+            token = request.POST['stripeToken']
+            usd = int(price) * 100
+            try:
+                customer = stripe.Customer.create(
+                email = email,
+                name = client,
+                source = token
+                )   
+                charge = stripe.Charge.create(
+                customer = customer,
+                amount = usd,
+                currency = 'usd',
+                description = titulo
+                )
                 reservacion = Reservation()
                 reservacion.date=date
                 reservacion.user= user
@@ -110,10 +127,13 @@ class anuncio(TemplateView):
                 reservacion.room= titulo
                 reservacion.save()
                 messages.success(request, "Reservacion exitosa")
-                
-                return render(request, selt.template_name,{'room':room, 'fecha':fecha })
-        else:
-            return render(request, selt.template_name,{'room':room, 'fecha':fecha })
+                pass
+            except stripe.error.CardError as e:
+                messages.warning(request,e.user_message)
+            
+        return render(request, 'hotel/Anuncio.html',{'room':room, 'fecha':fecha})   
+    else:
+        return render(request, 'hotel/Anuncio.html',{'room':room, 'fecha':fecha })
 
 class reservacion(TemplateView):
     template_name = 'hotel/Reservaciones.html'
@@ -123,13 +143,10 @@ class reservacion(TemplateView):
     
 class misreservacion(TemplateView):
     template_name = 'hotel/MisReservaciones.html'
-    def get(selt, request, id):
-        F_reser = Reservation.objects.filter(id = id)
-        if F_reser.exists():
-            F_reser.delete()
-            messages.success(request, "Eliminacion exitosa")
+    def get(selt, request):
         reser = Reservation.objects.all()
-        return render(request, selt.template_name, {'reser': reser, 'Freser': F_reser})
+        return render(request, selt.template_name, {'reser': reser})
+    
 class Reservaspdf(View):
     def get(selt, request, *args, **kwargs):
         reser = Reservation.objects.all()
@@ -148,34 +165,28 @@ class Reservaspdf(View):
 class contacto(TemplateView):
     template_name = 'hotel/contacto.html'
     def get(selt, request):
-        room = Room.objects.all()
-        return render(request, selt.template_name,{'room':room})
+        return render(request, selt.template_name)
     def post(selt, request):
-        room = Room.objects.all()
         if request.method=="POST":
             mail = request.POST["email"]
             asess = Asesoria.objects.filter(mail=mail)
             if asess.exists():
                 messages.warning(request, "Ya tiene una asesoria en curso")
-                return render(request, selt.template_name,{'room':room})
+                return redirect('contacto')
             else: 
                 name=request.POST["nombre"]
                 tel=request.POST["telefono"]
                 msg=request.POST["mensaje"]
-                rom=request.POST["room"]
-                dispo=request.POST["dispo"]
                 asesoria = Asesoria()
                 asesoria.name= name
                 asesoria.mail= mail
                 asesoria.cell= tel
                 asesoria.msg= msg
-                asesoria.room= rom
-                asesoria.dispo= dispo
                 asesoria.save()
                 messages.success(request, "Formulario enviado exitosamente")
-                return render(request, selt.template_name,{'room':room,})
+                return redirect('contacto')
         else:
-            return render(request, selt.template_name,{'room':room })
+            return redirect('contacto')
         
 class asesoria(TemplateView):
     template_name = 'hotel/Asesoria.html'
@@ -185,6 +196,6 @@ class asesoria(TemplateView):
             ass.delete()
             messages.success(request, "La asesoria se registro como realizada")
         ases = Asesoria.objects.all()
-        return render(request, selt.template_name, {'ases': ases, 'ass': ass})
+        return render(request, selt.template_name, {'ases': ases})
 
     

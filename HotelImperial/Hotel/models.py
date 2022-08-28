@@ -1,14 +1,10 @@
-import email
 from django.db import models
-from django.contrib.auth.models import User
-#from.models import Room
-
 
 # Create your models here.
 class Room (models.Model):
     title = models.CharField(max_length=100, verbose_name="Titulo")
     description = models.TextField(verbose_name="Descripcion")
-    price = models.FloatField(verbose_name="Precio")
+    price = models.IntegerField(verbose_name="Precio")
     image = models.ImageField(verbose_name="Imagen", upload_to= "rooms")
     NumPeople = models.IntegerField(verbose_name="Numero de Personas")
     NumRoom = models.IntegerField(verbose_name="Numero de Habitaciones")
@@ -89,8 +85,6 @@ class Asesoria (models.Model):
     mail = models.CharField(max_length=200, verbose_name="E-mail")
     cell = models.CharField(max_length=100, verbose_name="Telefono")
     msg = models.TextField(verbose_name="Mensaje")
-    room = models.CharField(max_length=150, verbose_name="Habitacion")
-    dispo = models.CharField(max_length=100, verbose_name="Disponibilidad")
     created = models.DateTimeField(auto_now_add=True, verbose_name="Fecha de Creacion")
     updated = models.DateTimeField(auto_now=True, verbose_name="Fecha de Modificacion")
 

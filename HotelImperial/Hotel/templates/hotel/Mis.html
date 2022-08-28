@@ -8,25 +8,25 @@
 </head>
 <body>
     <div >
-        <h1>Reporte de Reservaciones</h1>
-        <table border="1" >
+        <h1 style="text-align: center;">Reporte de Reservaciones</h1>
+        <table border="1">
             <thead>
-                <th>#</th>
-                <th>Cliente</th>
-                <th>Email</th>
-                <th>Usuario</th>
-                <th>Habitacion</th>
-                <th>Fecha</th>
+                <th style="width: 30px; padding: 3px 0">#</th>
+                <th style="width: 100px; padding: 3px 0">Cliente</th>
+                <th style="width: 200px; padding: 3px 0">Email</th>
+                <th style="width: 100px; padding: 3px 0">Usuario</th>
+                <th style="width: 100px; padding: 3px 0">Habitacion</th>
+                <th style="width: 150px; padding: 3px 0">Fecha</th>
             </thead>
             <tbody>
                 {% for reser in reser %}
                 <tr>
-                    <td>{{reser.id}}</td>
-                    <td>{{reser.cliente}}</td>
-                    <td>{{reser.mail}}</td>
-                    <td>{{reser.user}}</td>
-                    <td>{{reser.room}}</td>
-                    <td>{{reser.date}}</td>
+                    <td style="text-align: center; padding: 5px 0;">{{reser.id}}</td>
+                    <td style="text-align: center; padding: 5px 0;">{{reser.cliente}}</td>
+                    <td style="text-align: center; padding: 5px 0;">{{reser.mail}}</td>
+                    <td style="text-align: center; padding: 5px 0;">{{reser.user}}</td>
+                    <td style="text-align: center; padding: 5px 0;">{{reser.room}}</td>
+                    <td style="text-align: center; padding: 5px 0;">{{reser.date}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

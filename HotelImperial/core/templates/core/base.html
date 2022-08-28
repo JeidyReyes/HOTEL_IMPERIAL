@@ -49,9 +49,9 @@
                         {% if user.is_authenticated %}
                             {% if user.is_superuser %}
                             <a href="{% url 'reservacion' %}">Reservaciones</a>
-                            <a href="{% url 'asesoria' '1' %}">Asesorias</a>
+                            <a href="{% url 'asesoria' '0' %}">Asesorias</a>
                             {% else %}
-                            <a href="{% url 'misreservacion' '1' %}">Mis Reservaciones</a>
+                            <a href="{% url 'misreservacion' %}">Mis Reservaciones</a>
                             {% endif %}
                             <a href="{% url 'cerrar_sesion' %}">Cerrar Sesion</a> 
                         {% else %}              

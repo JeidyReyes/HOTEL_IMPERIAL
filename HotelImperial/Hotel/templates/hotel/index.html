@@ -10,6 +10,7 @@
         <h2 class="fw-600 centrar-texto"> Más sobre nosotros </h2>
         <div class="iconos-nosotros">
             {% for about in about %}
+            {% if forloop.counter == 1 %}
                 <div class="iconos">
                     <img src="{{about.image_security.url}}" alt="Icono
                         Seguridad">
@@ -26,6 +27,7 @@
                     <h3> Disponibilidad </h3>
                     <p>{{about.description_availability}}</p>
                 </div>
+            {% endif %}
             {% endfor %}
         </div>
     </section>
@@ -40,8 +42,8 @@
                     <div class="contenido-anuncio">
                         <h3>{{rooms.title}}</h3>
                         <p>{{rooms.description}}</p>
-                        <p class="precio"> $ {{rooms.price}} la noche</p>
-                        {% if rooms.price == 30.0 %}<br>{% endif %}
+                        <p class="precio"> $ {{rooms.price}}.00 la noche</p>
+                        {% if rooms.price == 30 %}<br>{% endif %}
                         <ul class="iconos-caracteristicas">
                             <li>
                                 <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
@@ -75,7 +77,7 @@
 
     <div class="seccion-inferior contenedor section">
         <section class="blog">
-            <h3 class="centrar-texto fw-600">Nuestro Blog</h3>
+            <h3 class="centrar-texto fw-600 section">Nuestro Blog</h3>
             {% for blog in blog %}
             {% if forloop.counter <= 2 %}
                 <article class="entrada-blog">
@@ -94,7 +96,7 @@
             {% endfor %}
         </section>
         <section class="testimoniales">
-            <h3 class="centrar-texto fw-600">Testimoniales</h3>
+            <h3 class="centrar-texto fw-600 section">Testimoniales</h3>
             <div class="testimonial">
                 {% for testimony in testimony %}
                 {% if forloop.counter == 1 %}

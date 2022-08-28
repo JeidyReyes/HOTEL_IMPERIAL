@@ -3,7 +3,7 @@
 {% block header %}site-header{% endblock %}
 {% block content %}
 {% load static %}
-<main class="seccion contenedor">
+<main class="section contenedor">
     <h2 class="fw-300 centrar-texto">Tipos de Habitaciones disponibles</h2>
     <div class="contenedor-anuncios">   
         {% for room in room %}
@@ -14,8 +14,8 @@
                 <div class="contenido-anuncio">
                     <h3>{{room.title}}</h3>
                     <p>{{room.description}}</p>
-                    <p class="precio"> $ {{room.price}} la noche</p>
-                    {% if room.price == 30.0 %}<br>{% endif %}
+                    <p class="precio"> $ {{room.price}}.00 la noche</p>
+                    {% if room.price == 30 %}<br>{% endif %}
                     <ul class="iconos-caracteristicas">
                         <li>
                             <img src="{% static 'core/img/Icon_Person.png' %}" alt="Icono Persona">
